@@ -1,0 +1,15 @@
+ button {
+    background-color: cyan;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 15px;
+ }
+ button:hover {
+    background-color: royalblue;
+ }
+ .clicked {
+    background-color: royalblue;
+ }
+ .clicked:hover {
+    background-color: blue;
+ }
