@@ -1,23 +1,15 @@
-'use strict';
+//todo: add firebase server functionality, and make delete permission exclusive to poster
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+var posts = ["This single page app is made in React. All of the comments are stored in localStorage on your computer, not an actual server. They can be cleared like cookies."];
+var authors = ["Andy"];
+if(!!localStorage.comments) {
+    posts = JSON.parse(localStorage.comments);
+}
+if(!!localStorage.auth) {
+    authors = JSON.parse(localStorage.auth);
+}
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDZDm2iVa3I6yL8IDVI9jnsf4ytBvNvWks",
-  authDomain: "react-4213a.firebaseapp.com",
-  projectId: "react-4213a",
-  storageBucket: "react-4213a.appspot.com",
-  messagingSenderId: "174354638401",
-  appId: "1:174354638401:web:0dfdfd005f3b8f5ecd48c0"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
+/*/
 class LikeButton extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +31,9 @@ class LikeButton extends React.Component {
             </button>
         );
     }
-}
+}/**/
+
+/*/
 class UnlikeButton extends React.Component {
     constructor(props) {
         super(props);
@@ -61,23 +55,32 @@ class UnlikeButton extends React.Component {
             </button>
         );
     }
-}
+}/**/
 
+//
 class Comment extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {content: localStorage.getItem("comment")};
+        this.state = {content: posts, author: authors};
+        this.deleteComment = this.deleteComment.bind(this);
+    }
+
+    deleteComment() {
+        authors.splice(this.props.postid, 1);
+        localStorage.auth = JSON.stringify(authors);
+        posts.splice(this.props.postid, 1);
+        localStorage.comments = JSON.stringify(posts);
+        window.location.reload();
     }
 
     render() {
         return (
-            <div id="post">
-                <p>{this.state.content}</p>
-            </div>
+            <div id="post"><span class="author">{this.state.author[this.props.postid]}</span><p>{this.state.content[this.props.postid]}</p><span onClick={this.deleteComment} class="delete">Delete</span></div>
         );
     }
-}
+}/**/
 
+//
 class Post extends React.Component {
     constructor(props) {
         super(props);
@@ -88,16 +91,27 @@ class Post extends React.Component {
             <div>
                 <textarea placeholder="Leave a comment." id="comment"></textarea>
                 <br/>
-                <button id="submit" onClick={function() {localStorage.setItem("comment", document.getElementById("comment").value); window.location.reload()}}>Submit</button>
+                <button id="submit" onClick={function() {
+                    authors.push("Potential Employer or Client");
+                    localStorage.auth = JSON.stringify(authors);
+                    posts.push(document.getElementById("comment").value);
+                    localStorage.comments = JSON.stringify(posts);
+                    window.location.reload();
+                    }}>Submit</button>
             </div>
         );
     }
 }/**/
 
 function App() {
+    const comments = [];
+    for (let i in posts) {
+        comments.push(<Comment postid={i}/>);
+    }
     return (
+
         <div>
-            <Comment/>
+            {comments}
             <br/>
             <Post/>
         </div>
@@ -106,4 +120,4 @@ function App() {
   
 const domContainer = document.querySelector('#app_container');
 const root = ReactDOM.createRoot(domContainer);
-root.render(<App/>);
+    root.render(<App/>);

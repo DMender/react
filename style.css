@@ -12,6 +12,26 @@ h1 {
     border: 2px solid royalblue;
     width: 90%;
     margin: auto;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: .3rem;
+}
+#post p {
+    margin: 1rem;
+    word-wrap: break-word;
+}
+#post .author {
+    font-size: 1.2rem;
+    margin: 1rem;;
+    color: royalblue;
+    opacity: 0.5;
+}
+#post .delete {
+    font-size: 0.6rem;
+    margin: 1rem;
+    font-style: italic;
+    color: royalblue;
+    opacity: 0.5;
 }
 textarea {
     width: 60%;
