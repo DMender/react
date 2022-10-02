@@ -33,6 +33,10 @@ h1 {
     color: royalblue;
     opacity: 0.5;
 }
+#post .delete:hover {
+    color:blue;
+    text-decoration: underline;     
+}
 textarea {
     width: 60%;
     margin-left: 20%;
