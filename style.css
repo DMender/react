@@ -1,15 +1,53 @@
- button {
-    background-color: cyan;
+@import url('https://fonts.googleapis.com/css2?family=Arvo&family=Reem+Kufi+Fun:wght@500&display=swap');
+body {
+    width: 70%;
+    margin: auto;
+    font-family: 'Arvo', serif;
+}
+h1 {
+    margin-left: 10%;
+    font-family: 'Reem Kufi Fun', sans-serif;
+}
+#post {
+    border: 2px solid royalblue;
+    width: 90%;
+    margin: auto;
+}
+textarea {
+    width: 60%;
+    margin-left: 20%;
+    resize: none;
+    border: 2px solid grey;
+    overflow: hidden;
+    font-family: 'Arvo', serif;
+}
+textarea:hover {
+    border-color: royalblue;
+}
+textarea:focus {
+    outline-color: blue;
+}
+#submit {
+    margin-left: 70%;
+}
+button {
+    background-color: grey;
     color: blue;
-    border: 1px solid blue;
-    border-radius: 15px;
- }
- button:hover {
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-family: 'Reem Kufi Fun', sans-serif;
+    padding: 0.1rem 0.5rem;
+}
+button:hover {
     background-color: royalblue;
- }
- .clicked {
-    background-color: royalblue;
- }
- .clicked:hover {
+    color: blue;
+}
+.clicked {
     background-color: blue;
- }
+    color: white;
+}
+.clicked:hover {
+    border: 1px solid blue;
+    background-color: white;
+    color: blue;
+}
