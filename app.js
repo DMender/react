@@ -1,63 +1,15 @@
-//todo: add firebase server functionality, and make delete permission exclusive to poster
-
 var posts = ["This single page app is made in React. All of the comments are stored in localStorage on your computer, not an actual server. They can be cleared like cookies."];
 var authors = ["Andy"];
-if(!!localStorage.comments) {
-    posts = JSON.parse(localStorage.comments);
+
+// Store comments in localStorage
+if(!!sessionStorage.posts) {
+    posts = JSON.parse(sessionStorage.posts);
 }
-if(!!localStorage.auth) {
-    authors = JSON.parse(localStorage.auth);
-}
-
-/*/
-class LikeButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { liked: false };
-    }
-
-    render() {
-        if (this.state.liked) {
-            return (
-                <button onClick={() => this.setState({ liked: false })} class="clicked">
-                    &#128402;
-                </button>
-            );
-        }
-
-        return (
-            <button onClick={() => this.setState({ liked: true })}>
-                &#128402;
-            </button>
-        );
-    }
+if(!!sessionStorage.authors) {
+    authors = JSON.parse(sessionStorage.authors);
 }/**/
 
-/*/
-class UnlikeButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { liked: false };
-    }
-
-    render() {
-        if (this.state.liked) {
-            return (
-                <button onClick={() => this.setState({ liked: false })} class="clicked">
-                    &#128403;
-                </button>
-            );
-        }
-
-        return (
-            <button onClick={() => this.setState({ liked: true })}>
-                &#128403;
-            </button>
-        );
-    }
-}/**/
-
-//
+// Comment class
 class Comment extends React.Component {
     constructor(props) {
         super(props);
@@ -65,7 +17,7 @@ class Comment extends React.Component {
         this.deleteComment = this.deleteComment.bind(this);
     }
 
-    deleteComment() {
+    deleteComment() { //when firebase is added check to see if user is comment author
         authors.splice(this.props.postid, 1);
         localStorage.auth = JSON.stringify(authors);
         posts.splice(this.props.postid, 1);
@@ -75,12 +27,12 @@ class Comment extends React.Component {
 
     render() {
         return (
-            <div id="post"><span class="author">{this.state.author[this.props.postid]}</span><p>{this.state.content[this.props.postid]}</p><span onClick={this.deleteComment} class="delete">Delete</span></div>
+            <div id="post"><span className="author">{this.state.author[this.props.postid]}</span><p >{this.state.content[this.props.postid]}</p><span onClick={this.deleteComment} className="delete">Delete</span></div>
         );
     }
 }/**/
 
-//
+// Post class
 class Post extends React.Component {
     constructor(props) {
         super(props);
@@ -103,10 +55,11 @@ class Post extends React.Component {
     }
 }/**/
 
+//The Main DOM of the React App
 function App() {
     const comments = [];
     for (let i in posts) {
-        comments.push(<Comment postid={i}/>);
+        comments.push(<Comment postid={i} key={i}/>);
     }
     return (
 
