@@ -1,5 +1,6 @@
-var posts = ["This single page app is made in React. All of the comments are stored in localStorage on your computer, not an actual server. They can be cleared like cookies."];
-var authors = ["Andy"];
+// fallback variables if the server is down
+var posts = ["This single page application is made with React. You don't see any comments because Firebase failed to connect. Please attempt to refresh your page."];
+var authors = ["Error"];
 
 // Store comments in localStorage
 if(!!sessionStorage.posts) {
@@ -17,12 +18,15 @@ class Comment extends React.Component {
         this.deleteComment = this.deleteComment.bind(this);
     }
 
-    deleteComment() { //when firebase is added check to see if user is comment author
+    deleteComment() {
+    /*/ TODO: check to see if poster is author, remove comment from database
         authors.splice(this.props.postid, 1);
         localStorage.auth = JSON.stringify(authors);
         posts.splice(this.props.postid, 1);
         localStorage.comments = JSON.stringify(posts);
         window.location.reload();
+    /**/
+        console.log("baleeted");
     }
 
     render() {
@@ -44,18 +48,21 @@ class Post extends React.Component {
                 <textarea placeholder="Leave a comment." id="comment"></textarea>
                 <br/>
                 <button id="submit" onClick={function() {
-                    authors.push("Potential Employer or Client");
-                    localStorage.auth = JSON.stringify(authors);
-                    posts.push(document.getElementById("comment").value);
-                    localStorage.comments = JSON.stringify(posts);
-                    window.location.reload();
+                    if (authors[0] != "Error") {
+                            authors.push("Potential Employer or Client");
+                            sessionStorage.authors = JSON.stringify(authors);
+                            posts.push(document.getElementById("comment").value);
+                            sessionStorage.posts = JSON.stringify(posts);
+                        } else {
+                            alert("You must connect to the Firebase server before you attempt to post a message!");
+                        }
                     }}>Submit</button>
             </div>
         );
     }
 }/**/
 
-//The Main DOM of the React App
+// The Main DOM of the React App
 function App() {
     const comments = [];
     for (let i in posts) {
