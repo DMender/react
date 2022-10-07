@@ -8,6 +8,23 @@ h1 {
     margin-left: 10%;
     font-family: 'Reem Kufi Fun', sans-serif;
 }
+#scroller {
+    max-height: 70vh;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: royalblue; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: blue; 
+}
+
 #post {
     border: 3px solid royalblue;
     width: 90%;

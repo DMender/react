@@ -101,7 +101,9 @@ function App() {
     return (
 
         <div>
+            <div id="scroller">
             {comments}
+            </div>
             <br/>
             <Post/>
         </div>
