@@ -34,9 +34,30 @@ get(child(dbRef, `posts`)).then((snapshot) => {
 }).catch((error) => {
   console.error(error);
 });
+
 get(child(dbRef, `authors`)).then((snapshot) => {
   if (snapshot.exists()) {
     sessionStorage.authors = JSON.stringify(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+get(child(dbRef, `idlist`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    sessionStorage.idlist = JSON.stringify(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+get(child(dbRef, `datelist`)).then((snapshot) => {
+  if (snapshot.exists()) {
+    sessionStorage.datelist = JSON.stringify(snapshot.val());
   } else {
     console.log("No data available");
   }
@@ -55,6 +76,8 @@ function refresh() {
   if (sessionStorage.postChanges != sessionStorage.posts) {
     set(ref(db, `authors`), JSON.parse(sessionStorage.authors));
     set(ref(db, `posts`), JSON.parse(sessionStorage.posts));
+    set(ref(db, `idlist`), JSON.parse(sessionStorage.idlist));
+    set(ref(db, `datelist`), JSON.parse(sessionStorage.datelist));
     if (sessionStorage.connected) {
       sessionStorage.connected = false;
       sessionStorage.postChanges = sessionStorage.posts;
