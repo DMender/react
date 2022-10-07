@@ -9,7 +9,7 @@ h1 {
     font-family: 'Reem Kufi Fun', sans-serif;
 }
 #scroller {
-    max-height: 70vh;
+    max-height: 60vh;
     overflow: auto;
     overflow-x: hidden;
 }
