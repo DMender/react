@@ -57,8 +57,7 @@ function refresh() {
     set(ref(db, `posts`), JSON.parse(sessionStorage.posts));
     if (sessionStorage.connected) {
       sessionStorage.connected = false;
-      sessionStorage.postChanges = "";
-      sessionStorage.posts = "";
+      sessionStorage.postChanges = sessionStorage.posts;
       location.reload();
     }
   } /*/ async communication between firebase.js and app.js debug code
