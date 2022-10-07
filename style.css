@@ -11,6 +11,7 @@ h1 {
 #post {
     border: 3px solid royalblue;
     width: 90%;
+    min-width: 250px;
     margin: auto;
     margin-bottom: 1rem;
     padding-top: 1rem;
@@ -22,7 +23,7 @@ h1 {
 }
 #post .author {
     font-size: 1.2rem;
-    margin: 1rem;;
+    margin: 1rem;
     color: royalblue;
     opacity: 0.5;
 }

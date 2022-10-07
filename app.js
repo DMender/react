@@ -74,7 +74,7 @@ class Post extends React.Component {
                     const d = new Date();
                     var posttime = d.toLocaleDateString() + " - " + d.toLocaleTimeString();
                     if (authors[0] != "Error") {
-                            authors.push("Potential Employer or Client");
+                            authors.push("Potential Employer");
                             sessionStorage.authors = JSON.stringify(authors);
                             posts.push(document.getElementById("comment").value);
                             sessionStorage.posts = JSON.stringify(posts);
