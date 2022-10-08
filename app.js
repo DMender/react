@@ -1,5 +1,5 @@
 // fallback variables if the server is down
-var posts = ["This single page application is made with React. You don't see any comments because Firebase failed to connect. Please attempt to refresh your page."];
+var posts = ["This single page application is made with React. You don't see any comments because Firebase failed to connect. If the browser does not reconnect automatically in 5 seconds please attempt to refresh your page."];
 var authors = ["Error"];
 var idlist = ["001"];
 var datelist = ["01/01/1970"];
@@ -45,6 +45,12 @@ class Comment extends React.Component {
             console.log("baleeted");
         } else {
             alert('Only the comment author may delete a message.');
+        }
+    }
+
+    componentDidMount() {
+        if (this.state.author[this.props.postid] == "Error") {
+            setTimeout(location.reload.bind(window.location), 3000);
         }
     }
 
